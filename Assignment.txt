@@ -1,0 +1,260 @@
+1)
+//1. Accept a integer number and when the program is executed print the binary, octal and hexadecimal equivalent of the given number.
+//Sample Output:
+//java Test
+//Enter Number : 20
+//Given Number :20
+//Binary equivalent :10100
+//Octal equivalent :24
+//Hexadecimal equivalent :14
+//Hint : toBinaryString() , toOctalString(), toHexString()
+
+import java.util.Scanner;
+public class Q1 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+
+        System.out.print("Enter the number: ");
+        int number= sc.nextInt();
+
+        System.out.println("Given Number: "+number);
+        System.out.println("Equivalent Binary Number: "+ Integer.toBinaryString(number));
+        System.out.println("Equivalent Octal Number: "+ Integer.toOctalString(number));
+        System.out.println("Equivalent Hexadecimal Number: "+ Integer.toHexString(number));
+
+        sc.close();
+    }
+}
+
+
+2)
+//2. Accept 2 double values from User (using Scanner). Check data type. If arguments are not doubles,
+// supply suitable error message & terminate. If numbers are double values, print its average.
+
+package p1;
+import java.util.Scanner;
+public class Q2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter two values:");
+
+        if (sc.hasNextDouble()) {
+            double num1 = sc.nextDouble();
+            if (sc.hasNextDouble()) {
+                double num2 = sc.nextDouble();
+
+                System.out.println("It is of type Double!");
+                double average = (num1 + num2) / 2.0;
+                System.out.println(average);
+            } else {
+                System.out.println("Terminate");
+            }
+        } else {
+            System.out.println("Terminate");
+        }
+        sc.close();
+    }
+}
+
+
+3)
+package p1;
+import java.util.Scanner;
+public class Q3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice = 0;
+        double totalBill = 0.0;
+        do {
+            System.out.println("\n---Food Menu---\n");
+            System.out.println("1. Dosa ---Price:Rs.60");
+            System.out.println("2. Samosa ---Price:Rs.20");
+            System.out.println("3. Kachori ---Price:Rs.20");
+            System.out.println("4. Idli ---Price:Rs.40");
+            System.out.println("5. Vada ---Price:Rs.30");
+            System.out.println("6. PavBhaji ---Price:Rs.80");
+            System.out.println("7. Bhel ---Price:Rs.50");
+            System.out.println("8. Panipuri ---Price:Rs.30");
+            System.out.println("9. Utappa ---Price:Rs60");
+            System.out.println("10. Generate Bill");
+
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the quantity of Dosa: ");
+                    int qty1 = sc.nextInt();
+                    totalBill += qty1 * 60;
+                    break;
+                case 2:
+                    System.out.print("Enter the quantity of Samosa: ");
+                    int qty2 = sc.nextInt();
+                    totalBill += qty2 * 20;
+                    break;
+                case 3:
+                    System.out.print("Enter the quantity of Kachori: ");
+                    int qty3 = sc.nextInt();
+                    totalBill += qty3 * 20;
+                    break;
+                case 4:
+                    System.out.print("Enter the quantity of Idli: ");
+                    int qty4 = sc.nextInt();
+                    totalBill += qty4 * 40;
+                    break;
+                case 5:
+                    System.out.print("Enter the quantity of Vada: ");
+                    int qty5 = sc.nextInt();
+                    totalBill += qty5 * 30;
+                    break;
+                case 6:
+                    System.out.print("Enter the quantity of Pavbhaji: ");
+                    int qty6 = sc.nextInt();
+                    totalBill += qty6 * 80;
+                    break;
+                case 7:
+                    System.out.print("Enter the quantity of Bhel: ");
+                    int qty7 = sc.nextInt();
+                    totalBill += qty7 * 50;
+                    break;
+                case 8:
+                    System.out.print("Enter the quantity of Panipuri: ");
+                    int qty8 = sc.nextInt();
+                    totalBill += qty8 * 30;
+                    break;
+                case 9:
+                    System.out.print("Enter the quantity of Utappa: ");
+                    int qty9 = sc.nextInt();
+                    totalBill += qty9 * 60;
+                    break;
+                case 10:
+                    System.out.println("Total Bill: " + totalBill);
+                    System.out.println("Thank you...");
+                    break;
+                default:
+                    System.out.println("Invalid Choice...!");
+                    break;
+            }
+        } while (choice != 10);
+        sc.close();
+    }
+}
+
+
+4)
+package p1;
+
+import java.util.Scanner;
+
+public class Q4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice = 0;
+        double totalBill = 0.0;
+
+        String[] itemNames = {
+                "Dosa", "Samosa", "Kachori", "Idli", "Vada",
+                "PavBhaji", "Bhel", "Panipuri", "Utappa"
+        };
+
+        int[] itemPrices = {60, 20, 20, 40, 30, 80, 50, 30, 60};
+
+        int[] orderedQuantities = new int[9];
+
+        do {
+            System.out.println("\n---Food Menu---\n");
+            System.out.println("1. Dosa ---Price:Rs.60");
+            System.out.println("2. Samosa ---Price:Rs.20");
+            System.out.println("3. Kachori ---Price:Rs.20");
+            System.out.println("4. Idli ---Price:Rs.40");
+            System.out.println("5. Vada ---Price:Rs.30");
+            System.out.println("6. PavBhaji ---Price:Rs.80");
+            System.out.println("7. Bhel ---Price:Rs.50");
+            System.out.println("8. Panipuri ---Price:Rs.30");
+            System.out.println("9. Utappa ---Price:Rs.60");
+            System.out.println("10. Generate Bill");
+
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            if (choice >= 1 && choice <= 9) {
+                int index = choice - 1;
+
+                System.out.print("Enter the quantity of " + itemNames[index] + ": ");
+                int qty = sc.nextInt();
+
+                orderedQuantities[index] += qty;
+
+                totalBill += qty * itemPrices[index];
+
+                System.out.println("\n--- Current Order Details ---");
+                for (int i = 0; i < orderedQuantities.length; i++) {
+                    if (orderedQuantities[i] > 0) {
+                        double itemTotal = orderedQuantities[i] * itemPrices[i];
+                        System.out.println(itemNames[i] + " -> Quantity: " + orderedQuantities[i] + " | Price: Rs." + itemPrices[i] + " | Total: Rs." + itemTotal);
+                    }
+                }
+                System.out.println("Current Total Bill: Rs." + totalBill);
+                System.out.println("-----------------------------");
+
+            } else if (choice == 10) {
+                // Final summary checkout
+                System.out.println("\n--- Final Bill ---");
+                boolean hasOrders = false;
+                for (int i = 0; i < orderedQuantities.length; i++) {
+                    if (orderedQuantities[i] > 0) {
+                        double itemTotal = orderedQuantities[i] * itemPrices[i];
+                        System.out.println(itemNames[i] + " x " + orderedQuantities[i] + " = Rs." + itemTotal);
+                        hasOrders = true;
+                    }
+                }
+                if (!hasOrders) {
+                    System.out.println("No items ordered.");
+                }
+                System.out.println("Total Bill Amount: Rs." + totalBill);
+                System.out.println("Thank you...");
+            } else {
+                System.out.println("Invalid Choice...!");
+            }
+
+        } while (choice != 10);
+
+        sc.close();
+    }
+}
+
+
+5)
+package p1;
+
+import java.util.Scanner;
+
+public class Q5 {
+
+    // Define the custom exception class
+    static class ExceptionLineTooLong extends Exception {
+        public ExceptionLineTooLong(String message) {
+            super(message);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        try {
+            validateStringLength(input);
+            System.out.println("The string is valid.");
+        } catch (ExceptionLineTooLong e) {
+            System.out.println(e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+    public static void validateStringLength(String input) throws ExceptionLineTooLong {
+        if (input.length() > 10) {
+            throw new ExceptionLineTooLong("The string is too long.");
+        }
+    }
+}
