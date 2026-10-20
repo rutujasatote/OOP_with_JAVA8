@@ -1,3 +1,495 @@
+
+1). Demonstrate when to use for, while, and do-while with suitable examples
+For loop: Use when the number of iterations is known.
+for (int i = 1; i <= 5; i++) {
+    System.out.println(i);
+}
+
+
+While loop: Use when the number of iterations is not known in advance; the condition is checked first.
+int i = 1;
+while (i <= 5) {
+    System.out.println(i);
+    i++;
+}
+
+
+Do-while loop: Use when the code must execute at least once, even if the condition is false.
+int i = 1;
+do {
+    System.out.println(i);
+    i++;
+} while (i <= 5);
+
+
+2). Explore enhanced for-loop (for-each) and its limitations
+Used to traverse arrays or collections without managing an index.
+int[] arr = {10, 20, 30};
+
+for (int num : arr) {
+    System.out.println(num);
+}
+
+
+Limitations:
+- Cannot directly access the index.
+- Not suitable for easily skipping or revisiting elements by index.
+- Cannot directly modify array elements by assigning to the loop variable.
+
+
+3). Understand variable scope in nested loops
+A variable declared inside a loop is accessible only within that loop's block.
+for (int i = 1; i <= 2; i++) {
+    for (int j = 1; j <= 3; j++) {
+        System.out.println(i + " " + j);
+    }
+}
+
+
+- i is accessible in the outer loop and inner loop.
+- j is accessible only inside the inner loop.
+- Both variables become inaccessible outside their respective scopes.
+
+
+4. Understand how objects are stored in memory: Stack vs Heap visualization
+In Java, stack memory stores local variables and method calls, while heap memory stores objects and arrays.
+Key Differences between Stack and Heap Memory
+1. Storage: Stack stores local variables and method call information, whereas Heap stores objects and arrays.
+
+2. Memory allocation: Stack memory is managed through method calls, whereas Heap memory is dynamically allocated for objects.
+
+3. Lifetime: Stack memory for a method frame is released when the method returns, whereas Heap objects remain until they are no longer reachable and are reclaimed by garbage collection.
+
+4. Thread access: Each thread has its own stack, whereas Heap memory is shared among threads.
+
+5. Speed: Stack allocation is generally faster, whereas Heap allocation generally involves more overhead.
+
+6. References: Local reference variables are stored in stack frames, while the objects they refer to are stored in Heap memory.
+
+
+5). 
+Methods and Constructor
+1. Difference between Method Declaration and Definition
+- Method declaration: Specifies the method name, return type, and parameters.
+- Method definition: Contains the actual implementation of the method.
+int add(int a, int b);  // Declaration (e.g. abstract method)
+
+int add(int a, int b) { // Definition
+    return a + b;
+}
+
+
+
+2. Can we have multiple constructors in a class?
+Yes, Java supports constructor overloading, which means having multiple constructors with different parameter lists.
+class Student {
+    Student() {
+        System.out.println("Default constructor");
+    }
+
+    Student(String name) {
+        System.out.println("Name: " + name);
+    }
+
+    Student(String name, int age) {
+        System.out.println(name + " " + age);
+    }
+}
+
+
+3. Constructor chaining using this() and super()
+- this() calls another constructor in the same class.
+- super() calls a constructor of the parent class.
+- Both must be the first statement in a constructor, so they cannot be used together in the same constructor.
+class Student {
+    Student() {
+        this("Rahul");
+    }
+
+    Student(String name) {
+        System.out.println(name);
+    }
+}
+
+class Person {
+    Person(String name) {
+        System.out.println(name);
+    }
+}
+
+class Employee extends Person {
+    Employee() {
+        super("Amit");
+    }
+}
+
+
+4. Implement Copy Constructors
+A copy constructor creates a new object by copying the values of another object of the same class. Java does not provide a built-in copy constructor; we define it ourselves.
+class Student {
+    int rollNo;
+    String name;
+
+    Student(int rollNo, String name) {
+        this.rollNo = rollNo;
+        this.name = name;
+    }
+
+    Student(Student s) {
+        this.rollNo = s.rollNo;
+        this.name = s.name;
+    }
+
+    void display() {
+        System.out.println(rollNo + " " + name);
+    }
+
+    public static void main(String[] args) {
+        Student s1 = new Student(101, "Rahul");
+        Student s2 = new Student(s1);
+
+
+6)
+Hirerachy and Inheritance
+Explore what happens if a child class does not implement abstract methods
+Study marker interfaces:
+Serializable
+Cloneable
+Learn interface evolution (Java 8+):
+Default methods
+Static methods 
+Decide when to use:
+Abstract classes vs Interfaces
+Try constructor overloading and understand its need
+
+1. What happens if a child class does not implement abstract methods?
+- If a child class does not implement all inherited abstract methods, it must also be declared abstract.
+- If it is declared a concrete class, the compiler generates an error.
+abstract class Animal {
+    abstract void sound();
+}
+
+abstract class Dog extends Animal {
+}
+
+class Puppy extends Dog {
+    void sound() {
+        System.out.println("Barking");
+    }
+}
+
+
+2. Marker Interfaces: Serializable and Cloneable
+- Serializable: Used to indicate that an object's state can be serialized into a byte stream.
+- Cloneable: Indicates that a class permits Object.clone() to create a field-by-field copy. Without implementing it, calling clone() normally throws CloneNotSupportedException.
+import java.io.Serializable;
+
+class Student implements Serializable, Cloneable {
+    int id;
+    String name;
+}
+
+
+3. Interface Evolution (Java 8+)
+Default methods: Have a method body inside an interface and can be inherited by implementing classes.
+interface Animal {
+    default void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+
+Static methods: Belong to the interface and are called using the interface name.
+interface Demo {
+    static void display() {
+        System.out.println("Hello");
+    }
+}
+
+// Call using: Demo.display();
+
+
+4. Abstract Classes vs Interfaces
+- Abstract class: Use when related classes share common state, constructors, and implementation.
+- Interface: Use when you want to define a common contract that different classes can implement.
+- A class can extend only one class but can implement multiple interfaces.
+- Abstract classes can have instance variables and constructors; interfaces cannot have constructors or ordinary instance fields.
+
+5. Constructor Overloading and Its Need
+Constructor overloading means defining multiple constructors in the same class with different parameter lists. It allows objects to be initialized in different ways.
+class Student {
+    int id;
+    String name;
+
+    Student() {
+        id = 0;
+        name = "Unknown";
+    }
+
+    Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+
+
+Need: It provides flexibility when creating objects, allowing either default values or user-supplied values.
+
+
+Explore:
+Interface-based vs class-based inheritance
+Diamond problem in Java
+
+
+7)
+1. Interface-Based vs Class-Based Inheritance
+- Class-based inheritance: A class inherits properties and methods from another class using extends.
+- Interface-based inheritance: A class implements an interface using implements and provides implementations for its abstract methods.
+- Java supports extending only one class, but a class can implement multiple interfaces.
+- Class inheritance promotes code reuse, while interfaces support abstraction and multiple-type contracts.
+
+2. Diamond Problem in Java
+- The diamond problem occurs when a class inherits the same method from two parent classes, creating ambiguity about which implementation to use.
+- Java avoids this problem by not allowing a class to extend multiple classes.
+- With interfaces, a class can implement multiple interfaces with the same default method, but it must override that method to resolve the conflict.
+
+
+8)
+Understand:
+Method overriding rules
+Covariant return types
+@Override annotation
+
+1. Method Overriding Rules
+- A child class provides its own implementation of a method inherited from the parent class.
+- The method name and parameter list must be the same.
+- The return type must be the same or covariant.
+- The access modifier cannot be more restrictive than the parent method.
+- private, static, and final methods cannot be overridden in the usual sense. Static methods are hidden, not overridden.
+- Constructors cannot be overridden.
+- The overridden method can throw the same or narrower checked exceptions, but not broader checked exceptions.
+
+2. Covariant Return Types
+- Covariant return types allow an overriding method to return a subclass of the return type declared in the parent method.
+- This applies to reference types, not primitive types.
+- The child method's return type must be the same as or a subtype of the parent's return type.
+
+3. @Override Annotation
+- @Override tells the compiler that a method is intended to override a parent-class method or implement an interface method.
+- It helps detect mistakes, such as incorrect method names or parameter lists.
+- It is optional, but recommended.
+- If the method does not actually override or implement a method, the compiler reports an error.
+
+
+9)
+Exception Handling
+Understand difference between throw vs throws
+throw is used to explicitly throw an exception.
+throws declares exceptions that a method may throw.
+throw is used inside a method or block.
+throws is used in the method declaration.
+throw is followed by an exception object.
+throws is followed by exception class names.
+throw throws one exception object at a time, while throws can declare multiple
+exception types.
+
+Practice multiple catch blocks
+public class Main {
+    public static void main(String[] args) {
+        try {
+            int a = 10 / 0;
+            int[] arr = {1, 2, 3};
+            System.out.println(arr[5]);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid array index");
+        } catch (Exception e) {
+            System.out.println("Some other exception occurred");
+        }
+    }
+}
+
+
+Learn benefits of try-with-resources.
+Try-with-resources automatically closes resources after the try block finishes, whether execution succeeds or an exception occurs.
+
+Benefits:
+- Prevents resource leaks.
+- Eliminates the need for an explicit finally block just to close resources.
+- Makes code shorter and easier to read.
+- Works with resources implementing AutoCloseable or Closeable, such as file readers, streams, and database connections.
+
+ 
+Learn: Checked vs Unchecked exceptions
+When to use which
+Checked exceptions are checked at compile time.
+Checked exceptions must be caught or declared using throws.
+Examples: IOException, SQLException, ClassNotFoundException.
+Unchecked exceptions occur at runtime and do not require compulsory handling.
+Examples: ArithmeticException, NullPointerException, ArrayIndexOutOfBoundsException.
+Checked exceptions are useful for recoverable conditions such as file or database failures.
+Unchecked exceptions are useful for programming errors or invalid arguments.
+Custom checked exceptions extend Exception.
+Custom unchecked exceptions extend RuntimeException.
+
+
+Use try-with-resources with multiple resources
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        try (
+            BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+            FileWriter fw = new FileWriter("output.txt")
+        ) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                fw.write(line);
+                fw.write(System.lineSeparator());
+            }
+
+            System.out.println("File copied successfully");
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+
+10) Collections
+1. Decide Which Collection to Use Based on Requirements
+ArrayList: Use when storing ordered elements and allowing duplicates.
+LinkedList: Use when frequent insertions and deletions are needed.
+HashSet: Use when unique elements are required without guaranteed order.
+HashMap: Use when storing key-value pairs and requiring fast lookup by key.
+TreeMap: Use when key-value pairs must be sorted by keys.
+PriorityQueue: Use when elements must be processed according to priority.
+
+
+2. Internal Working of HashMap
+Hashing: Converts a key into a hash value used to determine the bucket location.
+Buckets: Storage locations inside the HashMap where key-value entries are stored.
+Collision: Occurs when multiple keys map to the same bucket.
+Collision Handling: Java HashMap handles collisions using linked lists and can convert a bucket into a balanced tree when certain conditions are met.
+Key Equality: HashMap uses hashCode() to locate a bucket and equals() to identify matching keys.
+Performance: Average lookup, insertion, and deletion are O(1), assuming a good hash distribution.
+
+3. Iterator vs ListIterator
+Iterator can traverse collections in the forward direction only.
+ListIterator can traverse a List in both forward and backward directions.
+Iterator works with collections such as ArrayList, LinkedList, and HashSet.
+ListIterator works only with List implementations.
+Iterator supports element removal during iteration.
+ListIterator supports adding, removing, and replacing elements during iteration.
+ListIterator also provides methods to access the next and previous element indexes.
+
+4. Fail-Fast vs Fail-Safe Iterators
+Fail-Fast: Usually throws ConcurrentModificationException if a collection is structurally modified outside the iterator during iteration.
+Fail-Safe: A commonly used informal term for iterators that tolerate concurrent modifications, often through a snapshot or weakly consistent view.
+Fail-Fast Example: ArrayList, HashMap.
+Concurrent-Modification-Tolerant Examples: CopyOnWriteArrayList uses a snapshot iterator; ConcurrentHashMap provides weakly consistent iterators.
+Fail-Fast: Usually detects unexpected modifications rather than guaranteeing thread safety.
+Snapshot Iterator: Iterates over a copy of the collection's state and may not reflect later changes.
+Important: Fail-fast behavior is best-effort, and not every concurrent modification necessarily produces an exception.
+
+11) Functional Programming
+1. Method References
+Method references are a shorter way to refer to an existing method using the :: operator.
+They are commonly used with lambda expressions and functional interfaces.
+Types of Method References
+Static Method Reference: Refers to a static method of a class. Example: Integer::parseInt
+Instance Method Reference: Refers to an instance method of a particular object. Example: System.out::println
+Constructor Reference: Refers to a constructor to create objects. Example: Student::new
+
+2. Effectively Final Variables in Lambdas
+A variable is effectively final if its value is assigned once and never changed afterward.
+Local variables used inside lambda expressions must be final or effectively final.
+The variable cannot be reassigned after being captured by a lambda.
+Instance and static fields do not have this restriction.
+Example: int n = 10; list.forEach(x -> System.out.println(x + n));
+3. Streams in Java
+Streams process collections of data using operations such as filter(), map(), and sorted().
+Streams do not store data; they process data from a source.
+A stream pipeline generally consists of a source, intermediate operations, and a terminal operation.
+4. Lazy Evaluation
+Intermediate stream operations are executed only when a terminal operation is invoked.
+Examples of intermediate operations: filter(), map(), sorted().
+Examples of terminal operations: forEach(), collect(), count().
+Lazy evaluation avoids unnecessary processing when results are not requested.
+
+5. Stateless vs Stateful Operations
+Stateless Operations: Process each element independently without needing information from other elements.
+Examples: filter(), map().
+Stateful Operations: May need information about multiple elements or the entire input before producing results.
+Examples: sorted(), distinct().
+Stateful operations may require additional memory or processing.
+
+6. Short-Circuit Operations
+Short-circuit operations stop processing as soon as the required result is determined, where possible.
+Short-Circuit Intermediate Operations: limit(), takeWhile().
+Short-Circuit Terminal Operations: anyMatch(), allMatch(), noneMatch(), findFirst(), findAny().
+They can improve performance by avoiding unnecessary processing.
+Example: list.stream().anyMatch(n -> n > 10) returns true as soon as a matching element is found.
+
+12) JDBC
+1. SQL Injection Prevention Using Parameterized Queries
+SQL injection is an attack where malicious SQL code is inserted into user input.
+Parameterized queries prevent SQL injection by separating SQL commands from user-supplied values.
+Use PreparedStatement in Java instead of building SQL queries using string concatenation.
+Example: PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE id = ?");
+Set the value using ps.setInt(1, id);.
+Never directly concatenate untrusted input into SQL queries.
+
+2. Stored Procedures vs Functions
+Stored Procedure: A set of SQL statements stored in the database and executed using CALL in MySQL.
+Function: A stored program that returns a value and can be used in SQL expressions.
+Procedures can return results through result sets and output parameters.
+Functions return a value using RETURN.
+Procedures are generally used for performing operations or business processes.
+Functions are generally used for calculations and returning values.
+
+3. Optimistic vs Pessimistic Locking
+Optimistic Locking: Assumes conflicts are uncommon and checks for changes before updating data.
+It commonly uses a version number or timestamp to detect conflicting updates.
+It is suitable when simultaneous updates are rare.
+Pessimistic Locking: Locks data before modifying it to prevent conflicting transactions.
+It commonly uses database locking mechanisms such as SELECT ... FOR UPDATE.
+It is suitable when conflicts are frequent and data consistency is critical.
+
+4. Connection Pooling
+Connection pooling maintains a reusable collection of database connections.
+Connections are borrowed when needed and returned to the pool after use.
+It reduces the overhead of repeatedly creating and closing database connections.
+It improves application performance and resource management.
+Examples of Java connection pools include HikariCP and Apache Commons DBCP.
+In pooled applications, closing a connection usually returns it to the pool rather than physically closing it.
+
+5. Transaction Management
+A transaction is a group of database operations treated as one logical unit.
+A transaction is completed using COMMIT or cancelled using ROLLBACK.
+Transactions help maintain data consistency when multiple operations are related.
+ACID Properties
+Atomicity: All operations in a transaction succeed, or none of them are applied.
+Consistency: A transaction preserves database rules and constraints.
+Isolation: Concurrent transactions are controlled to prevent improper interference.
+Durability: Once committed, changes persist even after a system failure, subject to the database's durability guarantees.
+
+Commit and Rollback
+COMMIT: Permanently saves the changes made by the current transaction.
+ROLLBACK: Undoes uncommitted changes made in the current transaction.
+In JDBC, con.setAutoCommit(false) enables manual transaction control.
+Use con.commit() to save the transaction.
+Use con.rollback() to undo uncommitted changes.
+Example: In a bank transfer, debit and credit operations should both succeed; if either fails, roll back the transaction.
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
 1) pyramid pattern
 
 
